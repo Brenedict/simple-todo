@@ -1,6 +1,6 @@
 package com.example.todo.repository;
 
-import com.example.todo.model.Note;
+import com.example.todo.model.Task;
 
 import jakarta.transaction.Transactional;
 
@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NotesRepository extends JpaRepository<Note, Integer> {
-    List<Note> findAllByStatusFalseOrderByDateAsc();
+public interface TaskRepository extends JpaRepository<Task, Integer> {
+    List<Task> findAllByStatusFalseOrderByDateAsc();
 
-    List<Note> findAllByStatusTrueOrderByDateAsc();
+    List<Task> findAllByStatusTrueOrderByDateAsc();
 
     @Transactional
     void deleteAllByStatusFalse();

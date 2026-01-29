@@ -9,28 +9,28 @@
 <body>
 
 <header class="bttn-container gen-bttn">
-    <a class="bttn clear-bttn" hx-delete="history/clear-notes" hx-target="#history-notes-list-container">Clear Tasks</a>
+    <a class="bttn clear-bttn" hx-delete="history/clear-tasks" hx-target="#history-tasks-list-container">Clear Tasks</a>
     <a class="bttn main-back-bttn" href="/">Back</a>
 </header>
-<div id="history-notes-list-container" th:fragment="history-notes-list-wrapper" class="note-entries">
+<div id="history-tasks-list-container" th:fragment="history-tasks-list-wrapper" class="task-entries">
     
-    <div class="note-container empty-container" th:if="${#lists.isEmpty(allNotes)}">
+    <div class="task-container empty-container" th:if="${#lists.isEmpty(alltasks)}">
         <h1>You have no finished task yet...</h1>
     </div>
 
-    <main id="notes-list" th:each="note : ${allNotes}">
-        <div class="note-container">
-            <div class="note-body-container" th:style="|background-color: #fff|">
-                <h1 th:text="${note.title}"></h1>
-                <h3 th:text="${note.description}"></h3>
-                <p th:text="|Due Date: ${note.date}|"></p>
+    <main id="tasks-list" th:each="task : ${alltasks}">
+        <div class="task-container">
+            <div class="task-body-container" th:style="|background-color: #fff|">
+                <h1 th:text="${task.title}"></h1>
+                <h3 th:text="${task.description}"></h3>
+                <p th:text="|Due Date: ${task.date}|"></p>
             </div>
             <div class="bttn-container opt-bttn">
-                <form th:hx-patch="@{'/history/mark-not-done/' + ${note.id}}" hx-target="#history-notes-list-container">
+                <form th:hx-patch="@{'/history/mark-not-done/' + ${task.id}}" hx-target="#history-tasks-list-container">
                     <button class="bttn not-done-bttn" type="submit">Not Done</button>
                 </form>
 
-                <form th:hx-delete="@{'history/delete/' + ${note.id}}" hx-target="#history-notes-list-container">
+                <form th:hx-delete="@{'history/delete/' + ${task.id}}" hx-target="#history-tasks-list-container">
                     <button class="bttn deletes-bttn" type="submit">Delete</button>
                 </form>
             </div>

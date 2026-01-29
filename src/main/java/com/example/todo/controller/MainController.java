@@ -1,7 +1,7 @@
 package com.example.todo.controller;
 
-import com.example.todo.model.Note;
-import com.example.todo.service.NotesService;
+import com.example.todo.model.Task;
+import com.example.todo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,70 +12,70 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class MainController {
-    private final NotesService _service;
+    private final TaskService _service;
 
     @Autowired
-    public MainController(NotesService _service) {
+    public MainController(TaskService _service) {
         this._service = _service;
     }
 
     @GetMapping
     public String home(Model model) {
-        List<Note> notes = _service.getAllNotesOrderedByDate(true);
-        model.addAttribute("allNotes", notes);
+        List<Task> tasks = _service.getAllTasksOrderedByDate(true);
+        model.addAttribute("allTasks", tasks);
         return "index";
     }
 
     @GetMapping("/history")
     public String history(Model model) {
-        List<Note> notes = _service.getAllNotesOrderedByDate(false);
-        model.addAttribute("allNotes", notes);
+        List<Task> tasks = _service.getAllTasksOrderedByDate(false);
+        model.addAttribute("allTasks", tasks);
         return "history";
     }
 
-    @GetMapping("note-fill-up")
-    public String getNoteForm() {
-        return "note-form :: note-form";
+    @GetMapping("task-fill-up")
+    public String getTaskForm() {
+        return "task-form :: task-form";
     }
 
-    @GetMapping("note-fill-up/{id}")
-    public String editNoteForm(Model model, @PathVariable Integer id) {
-        Note note = _service.getNoteById(id);
-        model.addAttribute("note", note);
-        return "note-form :: note-form";
+    @GetMapping("task-fill-up/{id}")
+    public String editTaskForm(Model model, @PathVariable Integer id) {
+        Task task = _service.getTaskById(id);
+        model.addAttribute("task", task);
+        return "task-form :: task-form";
     }
 
     @PostMapping("save")
-    public String saveNote(Note note, Model model) {
-        _service.saveNote(note);
-        
-        model.addAttribute("allNotes", _service.getAllNotesOrderedByDate(true));
-        
-        // Return ONLY the fragment that wraps the notes list
-        return "index :: notes-list-wrapper";
+    public String saveTask(Task task, Model model) {
+        _service.saveTask(task);
+
+        model.addAttribute("allTasks", _service.getAllTasksOrderedByDate(true));
+
+        // Return ONLY the fragment that wraps the tasks list
+        return "index :: tasks-list-wrapper";
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteNote(@PathVariable Integer id, Model model) {
-        _service.deleteNote(id);
-        model.addAttribute("allNotes", _service.getAllNotesOrderedByDate(true));
-        return "index :: notes-list-wrapper";
+    public String deleteTask(@PathVariable Integer id, Model model) {
+        _service.deleteTask(id);
+        model.addAttribute("allTasks", _service.getAllTasksOrderedByDate(true));
+        return "index :: tasks-list-wrapper";
     }
 
-    @DeleteMapping("clear-notes")
-    public String clearNotes(Model model) {
-        _service.deleteAllNotes(true);
-        model.addAttribute("allNotes", _service.getAllNotesOrderedByDate(true));
-        return "index :: notes-list-wrapper";
+    @DeleteMapping("clear-tasks")
+    public String cleartasks(Model model) {
+        _service.deleteAllTasks(true);
+        model.addAttribute("allTasks", _service.getAllTasksOrderedByDate(true));
+        return "index :: tasks-list-wrapper";
     }
 
     @PatchMapping("mark-done/{id}")
     public String markDone(@PathVariable Integer id, Model model) {
-        Note note = _service.getNoteById(id);
-        note.setStatus(true);
-        _service.saveNote(note);
-        model.addAttribute("allNotes", _service.getAllNotesOrderedByDate(true));
-        return "index :: notes-list-wrapper";
+        Task task = _service.getTaskById(id);
+        task.setStatus(true);
+        _service.saveTask(task);
+        model.addAttribute("allTasks", _service.getAllTasksOrderedByDate(true));
+        return "index :: tasks-list-wrapper";
     }
 
     @GetMapping("clear-modal")

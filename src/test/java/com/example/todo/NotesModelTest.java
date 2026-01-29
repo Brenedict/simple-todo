@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
-import com.example.todo.model.Note;
+import com.example.todo.model.Task;
 
-public class NotesModelTest {
+public class TasksModelTest {
     
     @Test
     void testNoteCreation() {
-        Note note = new Note();
+        Task note = new Task();
         note.setTitle("Study JUnit");
         note.setDate("2023-01-01");
         note.setStatus(false);

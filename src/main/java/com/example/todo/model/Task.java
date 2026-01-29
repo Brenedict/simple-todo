@@ -11,8 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 @Entity
-@Table(name ="note")
-public class Note {
+@Table(name ="task")
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Highly recommended for H2
@@ -31,10 +31,10 @@ public class Note {
     // private String color;
 
     // Empty Constructor (Required by JPA)
-    public Note() {}
+    public Task() {}
 
     //  Constructor with no id
-    public Note(String title, String description, String date) {
+    public Task(String title, String description, String date) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -52,7 +52,7 @@ public class Note {
         return "Overdue by: " + Math.abs(days) + (Math.abs(days) == 1 ? " day" : " days");
     }
 
-    public String getNoteColor() {
+    public String getTaskColor() {
         if (this.date == null) return "#FFF";
 
         long days = ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(this.date));

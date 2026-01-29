@@ -1,10 +1,10 @@
   databaseChangeLog:
   - changeSet:
-      id: 001-create-note-table
+      id: 001-create-task-table
       author: benedict
       changes:
         - createTable:
-            tableName: note
+            tableName: task
             columns:
               - column:
                   name: id
@@ -33,14 +33,14 @@
       author: benedict
       changes:
         - dropColumn:
-            tableName: note
+            tableName: task
             columnName: color
   - changeSet:
       id: 003-add-status-column
       author: benedict
       changes:
         - addColumn:
-            tableName: note
+            tableName: task
             columns:
               - column:
                   name: status

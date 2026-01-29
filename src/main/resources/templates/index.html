@@ -10,38 +10,38 @@
 
 <header class="bttn-container gen-bttn">
     <a class="bttn new-bttn" 
-       hx-get="/note-fill-up" 
+       hx-get="/task-fill-up" 
        hx-target="#modals-here" 
        style="cursor: pointer;">New Task</a>
-    <a class="bttn clear-bttn" hx-delete="/clear-notes" hx-target="#notes-list-container">Clear Tasks</a>
+    <a class="bttn clear-bttn" hx-delete="/clear-tasks" hx-target="#tasks-list-container">Clear Tasks</a>
     <a class="bttn history-bttn" href="/history">Check History</a>
 </header>
 
 <div id="modals-here"></div>
 
-<div id="notes-list-container" th:fragment="notes-list-wrapper" class="note-entries">
+<div id="tasks-list-container" th:fragment="tasks-list-wrapper" class="task-entries">
     
-    <div class="note-container empty-container" th:if="${#lists.isEmpty(allNotes)}">
+    <div class="task-container empty-container" th:if="${#lists.isEmpty(alltasks)}">
         <h1>You have no pending task...</h1>
     </div>
 
-    <main id="notes-list" th:each="note : ${allNotes}">
-        <div class="note-container">
-            <div class="note-body-container" th:style="'background-color:' + ${note.getNoteColor}">
-                <h1 th:text="${note.title}"></h1>
-                <h3 th:text="${note.description}"></h3>
-                <p th:text="${note.dueStatus}"></p>
+    <main id="tasks-list" th:each="task : ${alltasks}">
+        <div class="task-container">
+            <div class="task-body-container" th:style="'background-color:' + ${task.gettaskColor}">
+                <h1 th:text="${task.title}"></h1>
+                <h3 th:text="${task.description}"></h3>
+                <p th:text="${task.dueStatus}"></p>
             </div>
             <div class="bttn-container opt-bttn">
-                <form th:hx-patch="@{'/mark-done/' + ${note.id}}" hx-target="#notes-list-container">
+                <form th:hx-patch="@{'/mark-done/' + ${task.id}}" hx-target="#tasks-list-container">
                     <button class="bttn done-bttn" type="submit">Done</button>
                 </form>
     
-                <form th:hx-get="@{'/note-fill-up/' + ${note.id}}" hx-target="#modals-here">
+                <form th:hx-get="@{'/task-fill-up/' + ${task.id}}" hx-target="#modals-here">
                     <button class="bttn edits-bttn" type="submit">Edit</button>
                 </form>
 
-                <form th:hx-delete="@{'/delete/' + ${note.id}}" hx-target="#notes-list-container">
+                <form th:hx-delete="@{'/delete/' + ${task.id}}" hx-target="#tasks-list-container">
                     <button class="bttn deletes-bttn" type="submit">Delete</button>
                 </form>
             </div>

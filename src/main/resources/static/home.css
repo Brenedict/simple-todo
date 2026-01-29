@@ -97,28 +97,28 @@ form button.bttn.edits-bttn:hover, form button.bttn.done-bttn:hover, form button
     background-color: var(--gray);
 }
 
-/* Note Configuration */
-.note-entries {
+/* task Configuration */
+.task-entries {
     display: flex;
     flex-direction: column;
 }
 
-.note-container {
+.task-container {
     margin-bottom: 1.4em;
 }
 
-.note-body-container {
+.task-body-container {
     border-radius: 20px;
     padding: 1em 1em 1em 1em;
 }
 
-/* Note text Config */
-.note-body-container h3 {
+/* task text Config */
+.task-body-container h3 {
     font-weight: 300;
     margin-bottom: 20px
 }
 
-.note-body-container p {
+.task-body-container p {
 /*    font-weight: 400;*/
 }
 
@@ -132,13 +132,13 @@ form button.bttn.edits-bttn:hover, form button.bttn.done-bttn:hover, form button
 }
 
 /* Modal Form Style */
-.note-row {
+.task-row {
 /*    border: 1px solid pink;*/
     display: flex;
     padding: 1em 10em;
 }
 
-.note-row input, .note-desc-input {
+.task-row input, .task-desc-input {
     flex: 1;
     border: 0px;
     background-color: #3d4247;
@@ -148,19 +148,19 @@ form button.bttn.edits-bttn:hover, form button.bttn.done-bttn:hover, form button
     transition: all ease 0.3s;
 }
 
-.note-row input, .note-desc-input {
+.task-row input, .task-desc-input {
     outline: none;
 }
 
-.note-row input:focus, .note-desc-input:focus, #title-input:focus {
+.task-row input:focus, .task-desc-input:focus, #title-input:focus {
     border-bottom: 2px solid var(--green);
 }
 
-.note-row input:hover, .note-desc-input:hover, #title-input:hover {
+.task-row input:hover, .task-desc-input:hover, #title-input:hover {
     background-color: #78797a;
 }
 
-.note-row label {
+.task-row label {
     width: 25%;
     color: var(--white-primary);
     font-size: 1.175em;
@@ -185,7 +185,7 @@ input[type="date"]:hover, input[type="color"]:hover {
     background-color: transparent;
 }
 
-.note-desc-input {
+.task-desc-input {
     height: 240px;
     padding: 0.5em;
     resize: none;
@@ -252,7 +252,7 @@ input[type="date"]:hover, input[type="color"]:hover {
     z-index: 1000;
 }
 
-.note-form-container {
+.task-form-container {
     width: 900px;
     background-color: var(--dark-secondary);
     border-radius: 20px;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="task-form" class="modal-overlay">
+    
+        <div class="task-form-container">
+            
+            <div class="modal-content">
+                <form hx-post="/save" hx-target="#tasks-list-container">
+                    <div class="task-row back-container">
+                        <a type="button" hx-get="/clear-modal" hx-target="#modals-here">back</a>
+                    </div>
+                    
+                    <input type="hidden" name="id" th:if="${task?.id != null}" th:value="${task.id}">
+
+                    <div class="task-row">
+                        <input id="title-input" type="text" name="title" th:value="${task?.title}" placeholder="Add a title..." required>
+                    </div>
+                    
+                    <div class="task-row">
+                        <label>Due Date</label>
+                        <input type="date" required name="date" th:value="${task?.date}">
+                    </div>
+
+                    <div class="task-row">
+                        <label>Description</label>
+                        <textarea class="task-desc-input" name="description" th:text="${task?.description}"></textarea>
+                    </div>
+
+                    <div class="task-row">
+                        <button class="submit-bttn" type="submit">Save Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
