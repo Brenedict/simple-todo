@@ -18,11 +18,19 @@ public class MainController {
     public MainController(NotesService _service) {
         this._service = _service;
     }
+
     @GetMapping
     public String home(Model model) {
-        List<Note> notes = _service.getAllNotesOrderedByDate();
+        List<Note> notes = _service.getAllNotesOrderedByDate(true);
         model.addAttribute("allNotes", notes);
         return "index";
+    }
+
+    @GetMapping("/history")
+    public String history(Model model) {
+        List<Note> notes = _service.getAllNotesOrderedByDate(false);
+        model.addAttribute("allNotes", notes);
+        return "history";
     }
 
     @GetMapping("note-fill-up")
@@ -41,7 +49,7 @@ public class MainController {
     public String saveNote(Note note, Model model) {
         _service.saveNote(note);
         
-        model.addAttribute("allNotes", _service.getAllNotes());
+        model.addAttribute("allNotes", _service.getAllNotesOrderedByDate(true));
         
         // Return ONLY the fragment that wraps the notes list
         return "index :: notes-list-wrapper";
@@ -50,14 +58,23 @@ public class MainController {
     @DeleteMapping("delete/{id}")
     public String deleteNote(@PathVariable Integer id, Model model) {
         _service.deleteNote(id);
-        model.addAttribute("allNotes", _service.getAllNotes());
+        model.addAttribute("allNotes", _service.getAllNotesOrderedByDate(true));
         return "index :: notes-list-wrapper";
     }
 
     @DeleteMapping("clear-notes")
-    public String deleteNote(Model model) {
-        _service.deleteAllNotes();
-        model.addAttribute("allNotes", _service.getAllNotes());
+    public String clearNotes(Model model) {
+        _service.deleteAllNotes(true);
+        model.addAttribute("allNotes", _service.getAllNotesOrderedByDate(true));
+        return "index :: notes-list-wrapper";
+    }
+
+    @PatchMapping("mark-done/{id}")
+    public String markDone(@PathVariable Integer id, Model model) {
+        Note note = _service.getNoteById(id);
+        note.setStatus(true);
+        _service.saveNote(note);
+        model.addAttribute("allNotes", _service.getAllNotesOrderedByDate(true));
         return "index :: notes-list-wrapper";
     }
 

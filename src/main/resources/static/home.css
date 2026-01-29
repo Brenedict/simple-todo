@@ -8,6 +8,7 @@
     --green: #2dba4e;
     --orange: #f0440a;
     --pink: #dcacf2;
+    --gray: #afb0b2;
 }
 
 * {
@@ -38,6 +39,7 @@ body {
     text-decoration: none;
     color: var(--white-primary);
     padding: 0.5em 0;
+    cursor: pointer;
 }
 
 .gen-bttn .bttn {
@@ -46,7 +48,6 @@ body {
     font-size: 1.2em;
     font-weight: 800;
     transition: all ease-in 0.3s;
-    cursor: pointer;
 }
 
 .opt-bttn .bttn {
@@ -79,19 +80,27 @@ body {
     background-color: var(--orange);
 }
 
-form button.bttn.deletes-bttn:hover {
-    background-color: var(--orange);
+form button.bttn.deletes-bttn {
+    background-color: red;
+    color: white;
 }
 
-form button.bttn.edits-bttn:hover {
-    background-color: var(--pink);
+form button.bttn.deletes-bttn:hover {
+    opacity: 0.8;
+}
+
+form button.bttn.edits-bttn:hover, form button.bttn.done-bttn:hover, form button.bttn.not-done-bttn:hover {
+    background-color: var(--gray);
+}
+
+.history-bttn:hover, .main-back-bttn:hover {
+    background-color: var(--gray);
 }
 
 /* Note Configuration */
 .note-entries {
     display: flex;
     flex-direction: column;
-    flex-flow:column-reverse;
 }
 
 .note-container {
@@ -250,4 +259,9 @@ input[type="date"]:hover, input[type="color"]:hover {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); 
     padding: 1.3em 0;
     margin: 0; 
+}
+
+/* History Tab Specific Styles */
+.not-done-bttn {
+    /* width: ; */
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List - History</title>
+    <link rel="stylesheet" th:href="@{/home.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body>
+
+<header class="bttn-container gen-bttn">
+    <a class="bttn clear-bttn" hx-delete="history/clear-notes" hx-target="#history-notes-list-container">Clear Tasks</a>
+    <a class="bttn main-back-bttn" href="/">Back</a>
+</header>
+<div id="history-notes-list-container" th:fragment="history-notes-list-wrapper" class="note-entries">
+    
+    <div class="note-container empty-container" th:if="${#lists.isEmpty(allNotes)}">
+        <h1>You have no finished task yet...</h1>
+    </div>
+
+    <main id="notes-list" th:each="note : ${allNotes}">
+        <div class="note-container">
+            <div class="note-body-container" th:style="|background-color: #fff|">
+                <h1 th:text="${note.title}"></h1>
+                <h3 th:text="${note.description}"></h3>
+                <p th:text="|Due Date: ${note.date}|"></p>
+            </div>
+            <div class="bttn-container opt-bttn">
+                <form th:hx-patch="@{'/history/mark-not-done/' + ${note.id}}" hx-target="#history-notes-list-container">
+                    <button class="bttn not-done-bttn" type="submit">Not Done</button>
+                </form>
+
+                <form th:hx-delete="@{'history/delete/' + ${note.id}}" hx-target="#history-notes-list-container">
+                    <button class="bttn deletes-bttn" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+</body>
+</html>

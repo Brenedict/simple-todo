@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>My Notes</title>
+    <title>To Do List</title>
     <link rel="stylesheet" th:href="@{/home.css}">
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
 </head>
@@ -12,8 +12,9 @@
     <a class="bttn new-bttn" 
        hx-get="/note-fill-up" 
        hx-target="#modals-here" 
-       style="cursor: pointer;">New Note</a>
-    <a class="bttn clear-bttn" hx-delete="/clear-notes" hx-target="#notes-list-container">Clear Notes</a>
+       style="cursor: pointer;">New Task</a>
+    <a class="bttn clear-bttn" hx-delete="/clear-notes" hx-target="#notes-list-container">Clear Tasks</a>
+    <a class="bttn history-bttn" href="/history">Check History</a>
 </header>
 
 <div id="modals-here"></div>
@@ -32,12 +33,16 @@
                 <p th:text="${note.dueStatus}"></p>
             </div>
             <div class="bttn-container opt-bttn">
-                <form th:hx-delete="@{'/delete/' + ${note.id}}" hx-target="#notes-list-container">
-                    <button class="bttn deletes-bttn" type="submit">Done</button>
+                <form th:hx-patch="@{'/mark-done/' + ${note.id}}" hx-target="#notes-list-container">
+                    <button class="bttn done-bttn" type="submit">Done</button>
                 </form>
     
                 <form th:hx-get="@{'/note-fill-up/' + ${note.id}}" hx-target="#modals-here">
                     <button class="bttn edits-bttn" type="submit">Edit</button>
+                </form>
+
+                <form th:hx-delete="@{'/delete/' + ${note.id}}" hx-target="#notes-list-container">
+                    <button class="bttn deletes-bttn" type="submit">Delete</button>
                 </form>
             </div>
         </div>
@@ -45,6 +50,7 @@
 
     <div id="modals-here" hx-swap-oob="true"></div>
 </div>
+
 
 </body>
 </html>

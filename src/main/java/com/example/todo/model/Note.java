@@ -26,6 +26,8 @@ public class Note {
     
     private String date;
 
+    private boolean status;
+
     // private String color;
 
     // Empty Constructor (Required by JPA)
@@ -94,6 +96,14 @@ public class Note {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     // public String getColor() {

@@ -20,8 +20,13 @@ public class NotesService {
         return _repository.findAll();
     }
 
-    public List<Note> getAllNotesOrderedByDate() {
-        return _repository.findAllByOrderByDateAsc();
+    // onlyActive = true --> status = false (not done) 
+    public List<Note> getAllNotesOrderedByDate(boolean onlyActive) {
+        if (onlyActive) {
+            return _repository.findAllByStatusFalseOrderByDateAsc();
+        }
+
+        return _repository.findAllByStatusTrueOrderByDateAsc();
     }
 
     public Note getNoteById(Integer id) {
@@ -36,7 +41,11 @@ public class NotesService {
         _repository.deleteById(id);
     }
 
-    public void deleteAllNotes() {
-        _repository.deleteAll();
+    public void deleteAllNotes(boolean onlyActive) {
+        if (onlyActive) {
+            _repository.deleteAllByStatusFalse();
+        } else {
+            _repository.deleteAllByStatusTrue();
+        }
     }  
 }

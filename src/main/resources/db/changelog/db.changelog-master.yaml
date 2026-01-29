@@ -35,3 +35,16 @@
         - dropColumn:
             tableName: note
             columnName: color
+  - changeSet:
+      id: 003-add-status-column
+      author: benedict
+      changes:
+        - addColumn:
+            tableName: note
+            columns:
+              - column:
+                  name: status
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false  
