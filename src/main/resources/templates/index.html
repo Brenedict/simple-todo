@@ -21,13 +21,13 @@
 
 <div id="tasks-list-container" th:fragment="tasks-list-wrapper" class="task-entries">
     
-    <div class="task-container empty-container" th:if="${#lists.isEmpty(alltasks)}">
+    <div class="task-container empty-container" th:if="${#lists.isEmpty(allTasks)}">
         <h1>You have no pending task...</h1>
     </div>
 
-    <main id="tasks-list" th:each="task : ${alltasks}">
+    <main id="tasks-list" th:each="task : ${allTasks}">
         <div class="task-container">
-            <div class="task-body-container" th:style="'background-color:' + ${task.gettaskColor}">
+            <div class="task-body-container" th:style="'background-color:' + ${task.getTaskColor}">
                 <h1 th:text="${task.title}"></h1>
                 <h3 th:text="${task.description}"></h3>
                 <p th:text="${task.dueStatus}"></p>

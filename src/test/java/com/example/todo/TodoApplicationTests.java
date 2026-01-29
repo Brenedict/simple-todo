@@ -17,33 +17,33 @@ class TodoApplicationTests {
 	@Autowired private TaskService service;
 
 	@Autowired
-    private TaskRepository noteRepository;
+    private TaskRepository taskRepository;
 
 	@BeforeEach
     void setUp() {
         // Clear everything first to ensure a clean state
-        noteRepository.deleteAll();
+        taskRepository.deleteAll();
 
         // Create one Done note
         Task doneNote = new Task();
         doneNote.setTitle("Done Note");
         doneNote.setStatus(true);
-        noteRepository.save(doneNote);
+        taskRepository.save(doneNote);
 
         // Create one Active note
         Task activeNote = new Task();
         activeNote.setTitle("Active Note");
         activeNote.setStatus(false);
-        noteRepository.save(activeNote);
+        taskRepository.save(activeNote);
     }
 
     @Test
-    void savingNoteWithoutTitle_shouldThrowException() {
-        Task note = new Task();
-        note.setTitle(null); // This should fail based on your constraints
+    void savingTaskWithoutTitle_shouldThrowException() {
+        Task task = new Task();
+        task.setTitle(null); // This should fail based on your constraints
         
         assertThrows(Exception.class, () -> {
-            service.saveNote(note);
+            service.saveTask(task);
         });
     }
 
