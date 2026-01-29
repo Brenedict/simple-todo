@@ -20,5 +20,9 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 
     @Transactional
     void deleteAllByStatusTrue();
+
+    long countByStatusTrue();
+
+    long countByStatusFalse();
 }
 
