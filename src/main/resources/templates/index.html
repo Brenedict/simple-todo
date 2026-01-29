@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Notes</title>
+    <link rel="stylesheet" th:href="@{/home.css}">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body>
+
+<header class="bttn-container gen-bttn">
+    <a class="bttn new-bttn" 
+       hx-get="/note-fill-up" 
+       hx-target="#modals-here" 
+       style="cursor: pointer;">New Note</a>
+    <a class="bttn clear-bttn" hx-delete="/clear-notes" hx-target="#notes-list-container">Clear Notes</a>
+</header>
+
+<div id="modals-here"></div>
+
+<div id="notes-list-container" th:fragment="notes-list-wrapper" class="note-entries">
+    
+    <div class="note-container empty-container" th:if="${#lists.isEmpty(allNotes)}">
+        <h1>You have no pending task...</h1>
+    </div>
+
+    <main id="notes-list" th:each="note : ${allNotes}">
+        <div class="note-container">
+            <div class="note-body-container" th:style="'background-color:' + ${note.getNoteColor}">
+                <h1 th:text="${note.title}"></h1>
+                <h3 th:text="${note.description}"></h3>
+                <p th:text="${note.dueStatus}"></p>
+            </div>
+            <div class="bttn-container opt-bttn">
+                <form th:hx-delete="@{'/delete/' + ${note.id}}" hx-target="#notes-list-container">
+                    <button class="bttn deletes-bttn" type="submit">Done</button>
+                </form>
+    
+                <form th:hx-get="@{'/note-fill-up/' + ${note.id}}" hx-target="#modals-here">
+                    <button class="bttn edits-bttn" type="submit">Edit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="modals-here" hx-swap-oob="true"></div>
+</div>
+
+</body>
+</html>

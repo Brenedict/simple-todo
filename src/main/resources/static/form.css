@@ -1,0 +1,154 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --dark-primary: #24292e;
+    --dark-secondary: #2b3137;
+    --white-primary: #ffffff;
+    --white-off: #fafbfc;
+    --green: #2dba4e;
+    --orange: #f0440a;
+    --pink: #dcacf2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--dark-primary);
+    font-family: "Montserrat", sans-serif;
+}
+
+.note-form-container {
+    margin: 0 auto;
+    margin-top: 2em;
+    width: 900px;
+    background-color: var(--dark-secondary);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.25);
+    padding: 1.3em 0;
+}
+
+.note-row {
+/*    border: 1px solid pink;*/
+    display: flex;
+    padding: 1em 10em;
+}
+
+.note-row input, .note-desc-input {
+    flex: 1;
+    border: 0px;
+    background-color: #3d4247;
+    color: var(--white-primary);
+    font-weight: 900;
+    border-radius: 10px;
+    transition: all ease 0.3s;
+}
+
+.note-row input, .note-desc-input {
+    outline: none;
+}
+
+.note-row input:focus, .note-desc-input:focus, #title-input:focus {
+    border-bottom: 2px solid var(--green);
+}
+
+.note-row input:hover, .note-desc-input:hover, #title-input:hover {
+    background-color: #78797a;
+}
+
+.note-row label {
+    width: 25%;
+    color: var(--white-primary);
+    font-size: 1.175em;
+}
+
+input[type="date"] {
+    padding: 0.5em;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Changes a black icon to white */
+}
+
+input[type="date"]:hover, input[type="color"]:hover {
+    cursor: pointer;
+}
+
+#title-input {
+    font-size: 2em;
+    border-bottom: 3px solid var(--white-off);
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.note-desc-input {
+    height: 240px;
+    padding: 0.5em;
+}
+
+.submit-bttn {
+    border: 2px solid #78797a;
+    color: var(--white-primary);
+    background-color: transparent;
+    border-radius: 50px;
+    width: 100%;
+    font-size: 1.175em;
+    font-weight: 500;
+    padding: 0.1em;
+    transition: all ease 0.3s;
+}
+
+.submit-bttn:hover {
+    background-color: var(--green);
+    border: var(--green) 2px solid;
+}
+
+.submit-bttn:active {
+    opacity: 0.8;
+    color: var(--dark-primary);
+}
+
+.back-container {
+    margin: 0;
+    padding-bottom: 0.3;
+}
+
+.back-container a {
+    text-decoration: none;
+    background-color: var(--white-primary);
+    border: 1px solid var(--white-primary);
+    color: var(--dark-primary);
+    border-radius: 50px;
+    padding: 0 1.5em;
+    font-weight: 500;
+    transition: all ease 0.3s;
+}
+
+.back-container a:hover {
+    background-color: var(--green);
+    border: var(--green) 1px solid;
+}
+
+.back-container a:active {
+    opacity: 0.8;
+    color: var(--white-primary);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    background: rgba(0,0,0,0.5); /* Dim the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+}

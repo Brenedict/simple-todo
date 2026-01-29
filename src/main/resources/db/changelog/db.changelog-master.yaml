@@ -1,0 +1,37 @@
+  databaseChangeLog:
+  - changeSet:
+      id: 001-create-note-table
+      author: benedict
+      changes:
+        - createTable:
+            tableName: note
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: date
+                  type: varchar(255)
+              - column:
+                  name: color
+                  type: varchar(7)
+                  defaultValue: "#ffffff"
+  - changeSet:
+      id: 002-remove-color-column
+      author: benedict
+      changes:
+        - dropColumn:
+            tableName: note
+            columnName: color
