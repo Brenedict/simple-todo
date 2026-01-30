@@ -14,6 +14,6 @@ import static io.cucumber.junit.platform.engine.Constants.*;
         key = GLUE_PROPERTY_NAME,
         value = "com.example.todo"
 )
-public class CucumberTestRunner {
+public class CucumberTests {
 
 }
